@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "521288497698",
+    "project_id": "smartpark1001-92c6b",
+    "storage_bucket": "smartpark1001-92c6b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521288497698:android:08af539f728505ed9aa87b",
+        "android_client_info": {
+          "package_name": "com.campuspark.campus_park"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPr7Pdzr16ht7LJUUqtyxWLwxwwUJklxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
