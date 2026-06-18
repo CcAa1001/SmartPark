@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPark - Apps on Google Play</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-color: #151c2c;
+            --border-color: #242f47;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --play-green: #03b075;
+            --play-green-hover: #05d08b;
+            --star-color: #ffb300;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1024px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 48px 24px;
+            flex: 1;
+        }
+
+        /* App Detail Header */
+        .app-detail-header {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 28px;
+            align-items: flex-start;
+        }
+
+        .app-icon-wrapper {
+            position: relative;
+        }
+
+        .app-icon {
+            width: 128px;
+            height: 128px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            object-fit: cover;
+        }
+
+        .app-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .app-developer {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--play-green);
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+
+        .app-developer:hover {
+            text-decoration: underline;
+        }
+
+        .app-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .app-tag {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 99px;
+        }
+
+        /* Stat Badges */
+        .app-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .badge-age {
+            background-color: #374151;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        /* Action Buttons */
+        .action-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            align-items: center;
+        }
+
+        .btn-install {
+            background-color: var(--play-green);
+            color: #06090e;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 12px 48px;
+            border-radius: 999px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(3, 176, 117, 0.2);
+            transition: all 0.2s ease;
+            text-align: center;
+            flex: 1;
+            max-width: 240px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-install:hover {
+            background-color: var(--play-green-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(3, 176, 117, 0.3);
+        }
+
+        .btn-install:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 11px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--card-color);
+            border-color: var(--text-secondary);
+            color: white;
+        }
+
+        /* Gallery Row */
+        .gallery-container {
+            margin-bottom: 40px;
+        }
+
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 10px;
+        }
+
+        .screenshot-card {
+            flex: 0 0 240px;
+            aspect-ratio: 9/16;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .screenshot-card:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Screenshot Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 9, 14, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--border-color);
+            object-fit: contain;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+            font-weight: 300;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* Info Section Grid */
+        .section-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .main-col {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .section-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .desc-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* Data Safety Card */
+        .safety-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .safety-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .safety-header-icon {
+            color: var(--play-green);
+        }
+
+        .safety-header-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .safety-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .safety-item-icon {
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .safety-item-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .safety-item-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .safety-item-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Ratings and Reviews */
+        .reviews-breakdown {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .rating-number-col {
+            text-align: center;
+        }
+
+        .rating-big-num {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .rating-stars {
+            color: var(--star-color);
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .rating-total-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .rating-histogram {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .histogram-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 8px;
+            background-color: var(--border-color);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background-color: var(--play-green);
+            border-radius: 99px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .no-reviews-msg {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.95rem;
+            margin: 12px 0;
+        }
+
+        .review-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .review-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .review-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .review-stars {
+            color: var(--star-color);
+            font-size: 0.75rem;
+        }
+
+        .review-date {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .review-body {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Rating Input Form */
+        .rating-form-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .form-stars-select {
+            display: flex;
+            gap: 8px;
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .form-star {
+            transition: color 0.15s;
+        }
+
+        .form-star.active {
+            color: var(--star-color);
+        }
+
+        .rating-form-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: #0d1320;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: white;
+            padding: 10px 14px;
+            outline: none;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--play-green);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-submit-review {
+            background-color: transparent;
+            border: 1px solid var(--play-green);
+            color: var(--play-green);
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-submit-review:hover {
+            background-color: var(--play-green);
+            color: #06090e;
+        }
+
+        /* Developer Contact info */
+        .dev-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dev-info-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .dev-info-item svg {
+            color: var(--play-green);
+        }
+
+        .dev-info-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .dev-info-item a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Toast Popup Notification */
+        .toast {
+            position: fixed;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            bottom: 40px;
+        }
+
+        /* Footer mock */
+        footer {
+            background-color: #090d16;
+            border-top: 1px solid var(--border-color);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--play-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Spinner animation for button */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(6, 9, 14, 0.3);
+            border-radius: 50%;
+            border-top-color: #06090e;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .app-detail-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .app-title {
+                font-size: 2rem;
+            }
+
+            .app-tags {
+                justify-content: center;
+            }
+
+            .action-row {
+                justify-content: center;
+            }
+
+            .btn-install {
+                flex: none;
+                width: 100%;
+                max-width: none;
+            }
+
+            .app-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px 0;
+            }
+
+            .stat-item {
+                border-right: none;
+            }
+
+            .stat-item:nth-child(odd) {
+                border-right: 1px solid var(--border-color);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <!-- App Header Detail -->
+        <div class="app-detail-header">
+            <div class="app-icon-wrapper">
+                <img src="images/AppLogo.jpg" class="app-icon" alt="SmartPark Logo">
+            </div>
+            <div class="app-info">
+                <h1 class="app-title">SmartPark</h1>
+                <a href="#" class="app-developer">Universitas Internasional Batam</a>
+                <div class="app-tags">
+                    <span class="app-tag">Auto & Vehicles</span>
+                    <span class="app-tag">Utilities</span>
+                    <span class="app-tag">Maps & Navigation</span>
+                </div>
+                <!-- Action Install row -->
+                <div class="action-row">
+                    <a href="app-release.apk" class="btn-install" id="download-btn">
+                        <span id="btn-text">Install</span>
+                    </a>
+                    <button class="btn-secondary" id="share-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badges Stats Grid -->
+        <div class="app-stats">
+            <div class="stat-item">
+                <div class="stat-val"><span id="avg-rating-badge">0.0</span> <span style="font-size:0.75rem; color:var(--text-secondary)">★</span></div>
+                <div class="stat-lbl"><span id="review-count-badge">0</span> reviews</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val" id="downloads-badge">0</div>
+                <div class="stat-lbl">Downloads</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">
+                    <span class="badge-age">3+</span>
+                </div>
+                <div class="stat-lbl">Rated for 3+</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">Everyone</div>
+                <div class="stat-lbl">Content rating</div>
+            </div>
+        </div>
+
+        <!-- Gallery Screenshots section -->
+        <div class="gallery-container">
+            <h2 class="gallery-title">Screenshots</h2>
+            <div class="gallery-scroll">
+                <div class="screenshot-card" onclick="openLightbox('images/screenshot1.png')">
+                    <img src="images/screenshot1.png" alt="Home Screen Dashboard">
+                </div>
+                <div class="screenshot-card" onclick="openLightbox('images/screenshot2.png')">
+                    <img src="images/screenshot2.png" alt="Parking Lot Detail Screen">
+                </div>
+                <div class="screenshot-card" onclick="openLightbox('images/screenshot3.png')">
+                    <img src="images/screenshot3.png" alt="Interactive Parking Map Screen">
+                </div>
+                <div class="screenshot-card" onclick="openLightbox('images/screenshot4.png')">
+                    <img src="images/screenshot4.png" alt="Recent Notification Alerts Screen">
+                </div>
+                <div class="screenshot-card" onclick="openLightbox('images/screenshot5.png')">
+                    <img src="images/screenshot5.png" alt="User Profile Details Screen">
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Grid -->
+        <div class="section-grid">
+            <div class="main-col">
+                <!-- Description card -->
+                <div class="section-card">
+                    <div class="section-title-row">
+                        <h2 class="section-title">About this app</h2>
+                    </div>
+                    <p class="desc-text">
+                        SmartPark app is the official smart parking assistant designed for Universitas Internasional Batam. Streamline your campus parking experience with live real-time spot vacancy mapping, fast ticketed entry QR gates, automatic parking session expiry reminder alerts (15 minutes warning), and a dynamic occupancy flow simulator.<br><br>
+                        No more driving in circles searching for spots. SmartPark keeps you informed, on time, and parked safely.
+                    </p>
+                </div>
+
+                <!-- Data Safety Card -->
+                <div class="section-card">
+                    <div class="section-title-row">
+                        <h2 class="section-title">Data safety</h2>
+                    </div>
+                    <div class="safety-card">
+                        <div class="safety-header">
+                            <svg class="safety-header-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <span class="safety-header-title">Safety starts with understanding how developers collect and share your data.</span>
+                        </div>
+                        <div class="safety-item">
+                            <svg class="safety-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                            <div class="safety-item-text">
+                                <span class="safety-item-title">No data shared with third parties</span>
+                                <span class="safety-item-desc">The developer declares that this app does not share user data with other companies or organizations.</span>
+                            </div>
+                        </div>
+                        <div class="safety-item">
+                            <svg class="safety-item-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M7 10h10"></path><path d="M7 14h10"></path><path d="M7 6h10"></path></svg>
+                            <div class="safety-item-text">
+                                <span class="safety-item-title">Data is encrypted in transit</span>
+                                <span class="safety-item-desc">Your credentials and parking schedules are sent over a secure connection to Google Firebase.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ratings and Reviews section -->
+                <div class="section-card">
+                    <div class="section-title-row">
+                        <h2 class="section-title">Ratings and reviews</h2>
+                    </div>
+
+                    <!-- Breakdown Graph -->
+                    <div class="reviews-breakdown">
+                        <div class="rating-number-col">
+                            <div class="rating-big-num" id="avg-rating-title">0.0</div>
+                            <div class="rating-stars" id="avg-stars-title">☆☆☆☆☆</div>
+                            <div class="rating-total-lbl"><span id="review-count-lbl">0</span> reviews</div>
+                        </div>
+                        <div class="rating-histogram">
+                            <div class="histogram-row">
+                                <span>5</span>
+                                <div class="bar-container">
+                                    <div class="bar-fill" id="bar-5"></div>
+                                </div>
+                            </div>
+                            <div class="histogram-row">
+                                <span>4</span>
+                                <div class="bar-container">
+                                    <div class="bar-fill" id="bar-4"></div>
+                                </div>
+                            </div>
+                            <div class="histogram-row">
+                                <span>3</span>
+                                <div class="bar-container">
+                                    <div class="bar-fill" id="bar-3"></div>
+                                </div>
+                            </div>
+                            <div class="histogram-row">
+                                <span>2</span>
+                                <div class="bar-container">
+                                    <div class="bar-fill" id="bar-2"></div>
+                                </div>
+                            </div>
+                            <div class="histogram-row">
+                                <span>1</span>
+                                <div class="bar-container">
+                                    <div class="bar-fill" id="bar-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form to add ratings and reviews -->
+                    <div class="rating-form-card">
+                        <span class="form-title">Write a review</span>
+                        <div class="form-stars-select" id="form-stars">
+                            <span class="form-star" data-value="1">★</span>
+                            <span class="form-star" data-value="2">★</span>
+                            <span class="form-star" data-value="3">★</span>
+                            <span class="form-star" data-value="4">★</span>
+                            <span class="form-star" data-value="5">★</span>
+                        </div>
+                        <div class="rating-form-inputs">
+                            <input type="text" id="reviewer-name" class="form-input" placeholder="Your Name (e.g. Christhian)" required>
+                            <textarea id="reviewer-text" class="form-input" placeholder="Tell others what you think about this app..." required></textarea>
+                        </div>
+                        <button class="btn-submit-review" id="submit-review-btn">Submit Review</button>
+                    </div>
+
+                    <!-- Review list -->
+                    <div class="review-list" id="reviews-container">
+                        <p class="no-reviews-msg" id="no-reviews-placeholder">No reviews yet. Be the first to share your experience!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-col">
+                <!-- Developer contact section -->
+                <div class="section-card">
+                    <h2 class="gallery-title" style="font-size:1.1rem; margin-bottom:16px;">Developer Contact</h2>
+                    <div class="dev-info-list">
+                        <div class="dev-info-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <a href="mailto:2332061.christhian@uib.edu">2332061.christhian@uib.edu</a>
+                        </div>
+                        <div class="dev-info-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <a href="https://uib.ac.id" target="_blank">uib.ac.id</a>
+                        </div>
+                        <div class="dev-info-item">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>Batam, Kepulauan Riau, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Screenshot Lightbox Modal -->
+    <div class="modal" id="lightbox-modal" onclick="closeLightbox()">
+        <button class="modal-close" onclick="closeLightbox()">&times;</button>
+        <img class="modal-content" id="lightbox-image" alt="Screenshot Full View" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast-message">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <span>Link copied to clipboard!</span>
+    </div>
+
+    <!-- Footer Mock -->
+    <footer>
+        <p>Universitas Internasional Batam.</p>
+        <p style="margin-top: 8px;">View project files and configuration on <a href="https://github.com/ccaa1001/SmartPark" target="_blank">GitHub</a>.</p>
+    </footer>
+
+    <script>
+        // Interactive Downloads Tracker
+        let downloadsCount = parseInt(localStorage.getItem('smartpark_downloads') || '0');
+        const installBtn = document.getElementById('download-btn');
+        const btnText = document.getElementById('btn-text');
+        const downloadsBadge = document.getElementById('downloads-badge');
+
+        downloadsBadge.textContent = downloadsCount;
+
+        // If previously downloaded, keep UI state updated
+        if (downloadsCount > 0) {
+            setBtnInstalled();
+        }
+
+        installBtn.addEventListener('click', (e) => {
+            // Increment download counter
+            if (downloadsCount === 0) {
+                downloadsCount = 1;
+                localStorage.setItem('smartpark_downloads', '1');
+                downloadsBadge.textContent = "1";
+                
+                // Show installation feedback
+                btnText.innerHTML = '<span class="spinner"></span> Installing...';
+                installBtn.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    setBtnInstalled();
+                }, 3000);
+            }
+        });
+
+        function setBtnInstalled() {
+            btnText.textContent = 'Installed';
+            installBtn.style.backgroundColor = '#1f2937';
+            installBtn.style.color = '#03b075';
+            installBtn.style.border = '1px solid var(--border-color)';
+            installBtn.style.pointerEvents = 'none';
+        }
+
+        // Share Button - Just copy directly to clipboard
+        const shareBtn = document.getElementById('share-btn');
+        const toast = document.getElementById('toast-message');
+
+        shareBtn.addEventListener('click', () => {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }).catch((err) => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+
+        // Screenshot Lightbox Modal Logic
+        const modal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-image');
+
+        function openLightbox(imagePath) {
+            modal.style.display = 'flex';
+            lightboxImg.src = imagePath;
+            // Trigger animation frame for smooth transition
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Esc key to close lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // Dynamic Rating & Reviews engine with localStorage persistence
+        let reviewsList = JSON.parse(localStorage.getItem('smartpark_reviews') || '[]');
+        let selectedStars = 0;
+
+        const starElements = document.querySelectorAll('.form-star');
+        const submitReviewBtn = document.getElementById('submit-review-btn');
+        const reviewerNameInput = document.getElementById('reviewer-name');
+        const reviewerTextInput = document.getElementById('reviewer-text');
+        const reviewsContainer = document.getElementById('reviews-container');
+        const noReviewsPlaceholder = document.getElementById('no-reviews-placeholder');
+
+        // Stars selector handler
+        starElements.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = parseInt(star.getAttribute('data-value'));
+                selectedStars = value;
+                
+                starElements.forEach((s, idx) => {
+                    if (idx < value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Submit review handler
+        submitReviewBtn.addEventListener('click', () => {
+            const name = reviewerNameInput.value.trim() || "Anonymous UIB Student";
+            const body = reviewerTextInput.value.trim();
+
+            if (selectedStars === 0) {
+                alert("Please select a rating of at least 1 star.");
+                return;
+            }
+
+            if (!body) {
+                alert("Please write a review comment.");
+                return;
+            }
+
+            // Create new review object
+            const newReview = {
+                name: name,
+                rating: selectedStars,
+                body: body,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            };
+
+            // Add to list
+            reviewsList.unshift(newReview);
+
+            // Persist to localStorage
+            localStorage.setItem('smartpark_reviews', JSON.stringify(reviewsList));
+
+            // Reset inputs
+            reviewerNameInput.value = '';
+            reviewerTextInput.value = '';
+            selectedStars = 0;
+            starElements.forEach(s => s.classList.remove('active'));
+
+            // Re-render UI
+            renderReviews();
+        });
+
+        function renderReviews() {
+            // Render review item cards
+            const currentItemHtml = reviewsList.map((rev, index) => {
+                const filledStars = '★'.repeat(rev.rating);
+                const emptyStars = '☆'.repeat(5 - rev.rating);
+                const firstChar = rev.name.charAt(0);
+                
+                return `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-user">
+                                <div class="user-avatar" style="background-color: ${getUserAvatarColor(rev.name)}">${firstChar}</div>
+                                <span class="user-name">${rev.name}</span>
+                            </div>
+                            <div class="review-meta">
+                                <span class="review-stars">${filledStars}${emptyStars}</span>
+                                <span class="review-date">${rev.date}</span>
+                            </div>
+                        </div>
+                        <p class="review-body">${rev.body}</p>
+                    </div>
+                `;
+            }).join('');
+
+            // Keep placeholder if list empty
+            reviewsContainer.innerHTML = currentItemHtml || `
+                <p class="no-reviews-msg" id="no-reviews-placeholder">No reviews yet. Be the first to share your experience!</p>
+            `;
+
+            // Calculate aggregations
+            const totalCount = reviewsList.length;
+            const sumRatings = reviewsList.reduce((acc, rev) => acc + rev.rating, 0);
+            const average = totalCount > 0 ? (sumRatings / totalCount).toFixed(1) : "0.0";
+
+            // Update badges
+            document.getElementById('avg-rating-badge').textContent = average;
+            document.getElementById('review-count-badge').textContent = totalCount;
+            document.getElementById('avg-rating-title').textContent = average;
+            document.getElementById('review-count-lbl').textContent = totalCount;
+
+            // Update big stars title
+            const avgVal = parseFloat(average);
+            let avgStarsString = '';
+            for (let i = 1; i <= 5; i++) {
+                if (avgVal >= i) {
+                    avgStarsString += '★';
+                } else if (avgVal >= i - 0.5) {
+                    avgStarsString += '★'; // Simplified mapping
+                } else {
+                    avgStarsString += '☆';
+                }
+            }
+            document.getElementById('avg-stars-title').textContent = avgStarsString;
+
+            // Recalculate stars histogram distributions
+            const counts = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+            reviewsList.forEach(r => counts[r.rating]++);
+
+            for (let star = 1; star <= 5; star++) {
+                const barFill = document.getElementById(`bar-${star}`);
+                const pct = totalCount > 0 ? (counts[star] / totalCount) * 100 : 0;
+                barFill.style.width = `${pct}%`;
+            }
+        }
+
+        // Color generator mapping based on reviewer names for avatars
+        function getUserAvatarColor(name) {
+            const colors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'];
+            let sum = 0;
+            for (let i = 0; i < name.length; i++) {
+                sum += name.charCodeAt(i);
+            }
+            return colors[sum % colors.length];
+        }
+
+        // Run render on initial page load
+        renderReviews();
+    </script>
+</body>
+</html>
